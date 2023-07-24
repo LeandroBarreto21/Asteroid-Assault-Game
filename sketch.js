@@ -218,7 +218,7 @@ function gameLoop() {
                 ballArray.splice(j, 1);
                 asteroid_hit.play();
 
-                score += 5;
+                score += 10;
                 temp = new Ball(random(0, 500), random(-500, -20), random(10, 255), random(25, 51), random(2, 5));
                 ballArray.push(temp);
                 break;
