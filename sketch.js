@@ -107,7 +107,7 @@ function beginGame() {
     textStyle(NORMAL);
     text("Navigate the asteroid field!", 15, 90);
     fill(0, 255, 100);
-    text("Reach at least 10000 points to win!", 170, 450);
+    text("Reach at least 5000 points to win!", 170, 450);
     fill(255);
     textSize(30);
     text("Click to Begin Game...", 110, 250);
@@ -246,7 +246,7 @@ function endGame() {
     image(space_image, 250, 250);
     
     if (!game_over.isPlaying() && !win_sound.isPlaying() && !SoundPlayed) {
-        if (score < 10000) {
+        if (score < 5000) {
             game_over.play();
             SoundPlayed = true;
         }
@@ -264,13 +264,13 @@ function endGame() {
         gameplay_music.stop();
     }
 
-    if (score < 10000) {
+    if (score < 5000) {
         textSize(60);
         fill(255, 0 ,0);
         text("Game Over", 100, 50);
     }
 
-    if (score >= 10000) {
+    if (score >= 5000) {
         textSize(60);
         fill(0, 255 ,0);
         text("Congrats!", 100, 50);
