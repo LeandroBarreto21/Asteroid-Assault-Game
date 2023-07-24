@@ -110,6 +110,8 @@ function beginGame() {
     text("Use Spacebar to shoot asteroids", 95, 120);
     fill(0, 255, 100);
     text("Reach at least 5000 points to win!", 90, 150);
+    textSize(15);
+    text("(1 point awarded for every asteroid dodged)", 93, 180);
     fill(255);
     textSize(30);
     text("Click to Begin Game...", 95, 250);
@@ -275,15 +277,15 @@ function endGame() {
     if (score >= 5000) {
         textSize(60);
         fill(0, 255 ,0);
-        text("Congrats!", 100, 50);
+        text("Congrats! You Won!", 100, 50);
     }
 
     fill(255);
     textSize(30);
     text("Final Score: " + score, 155, 140);
     textSize(20);
-    text("This game was brought to you by: Rahimin, AKM, ", 20, 450);
-    text("Isaac, Leandro, and Cassius", 21, 470);
+    text("This game was brought to you by: ", 83, 450);
+    text("Rahimin, AKM, Isaac, Leandro, and Cassius", 41, 470);
     // Draw the "Try Again" button
     fill(255, 0, 0);
     rect(250, 270, 120, 40);
