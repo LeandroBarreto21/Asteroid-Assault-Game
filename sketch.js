@@ -271,18 +271,19 @@ function endGame() {
     if (score < 5000) {
         textSize(60);
         fill(255, 0 ,0);
-        text("Game Over", 100, 50);
+        text("Game Over", 80, 50);
     }
 
     if (score >= 5000) {
         textSize(60);
         fill(0, 255 ,0);
-        text("Congrats! You Won!", 100, 50);
+        text("Congrats!!!", 90, 20);
+        text("You Won!", 110, 90);
     }
 
     fill(255);
     textSize(30);
-    text("Final Score: " + score, 155, 140);
+    text("Final Score: " + score, 130, 170);
     textSize(20);
     text("This game was brought to you by: ", 83, 450);
     text("Rahimin, AKM, Isaac, Leandro, and Cassius", 41, 470);
