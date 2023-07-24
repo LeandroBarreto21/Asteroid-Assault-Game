@@ -7,7 +7,7 @@ let score = 0;
 let canShoot = true;
 let gameEnded = false;
 let gameStarted = false;
-let gameOverSoundPlayed = false;
+let SoundPlayed = false;
 
 
 let ship_image;
@@ -244,9 +244,16 @@ function gameLoop() {
 function endGame() {
     image(space_image, 250, 250);
     
-    if (!game_over.isPlaying() && !gameOverSoundPlayed) {
-        game_over.play();
-        gameOverSoundPlayed = true;
+    if (!game_over.isPlaying() && !win_sound.isPlaying() && !SoundPlayed) {
+        if (score < 10000) {
+            game_over.play();
+            SoundPlayed = true;
+        }
+
+        else { 
+            win_sound.play();
+            SoundPlayed = true;
+        }
     }
     if (!start_end_music.isPlaying()) {
         start_end_music.loop();
@@ -256,9 +263,18 @@ function endGame() {
         gameplay_music.stop();
     }
 
-    textSize(60);
-    fill(255, 0 ,0);
-    text("Game Over", 100, 50);
+    if (score < 10000) {
+        textSize(60);
+        fill(255, 0 ,0);
+        text("Game Over", 100, 50);
+    }
+
+    if (score > 10000) {
+        textSize(60);
+        fill(255, 0 ,0);
+        text("Congrats!", 100, 50);
+    }
+
     fill(255);
     textSize(30);
     text("Final Score: " + score, 155, 140);
