@@ -111,7 +111,8 @@ function beginGame() {
     fill(0, 255, 100);
     text("Reach at least 5000 points to win!", 90, 150);
     textSize(15);
-    text("(1 point awarded for every asteroid dodged)", 93, 180);
+    text("(1 point awarded for every asteroid averted)", 93, 180);
+    text("(10 point awarded for every asteroid destroyed)", 78, 200);
     fill(255);
     textSize(30);
     text("Click to Begin Game...", 95, 250);
