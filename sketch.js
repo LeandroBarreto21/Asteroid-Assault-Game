@@ -5,6 +5,9 @@ let enemyYPos;
 let lives = 3;
 let score = 0;
 let canShoot = true;
+let gameEnded = false;
+let gameStarted = false;
+
 
 let ship_image;
 let space_image;
@@ -34,6 +37,8 @@ function setup() {
    }
 
    imageMode(CENTER);
+   textAlign(LEFT, TOP);
+   rectMode(CENTER);
 }
 //creates an asteroid with appropiate features
 class Ball {
@@ -60,17 +65,72 @@ class Bullet {
     
 }
 
-function draw() {
+function draw() { 
    image(space_image, 250, 250);
     
+    if (!gameStarted) {
+        beginGame();
+      } 
+
+    else if (!gameEnded) {
+        gameLoop();
+    } 
+
+    else {
+        endGame();
+    }
+}
+
+function beginGame() {
+    image(space_image, 250, 250);
+    if (!start_end_music.isPlaying()) {
+        start_end_music.loop();
+    }
+
+    if (gameplay_music.isPlaying()) {
+        gameplay_music.stop();
+    }
+
+    fill(0, 255, 255);
+    textSize(45);
+    textStyle(BOLDITALIC)
+    text("ASTEROID ASSAULT", 16, 16);
+    fill(0, 200, 255);
+    text("ASTEROID ASSAULT", 18, 18);
+    fill(0, 150, 255);
+    text("ASTEROID ASSAULT", 20, 20);
+
+    fill(255, 0, 100);
+    textSize(20);
+    textStyle(NORMAL);
+    text("Navigate the asteroid field!", 15, 90);
+    fill(0, 255, 100);
+    text("Reach at least 10000 points to win!", 170, 450);
+    fill(255);
+    textSize(30);
+    text("Click to Begin Game...", 110, 250);
+    
+}
+
+function gameLoop() {
+    // music
+    if (!gameplay_music.isPlaying()) {
+        gameplay_music.loop();
+    }
+
+    if (start_end_music.isPlaying()) {
+        start_end_music.stop();
+    }
+
+
+    //asteroid creation
    for (let i = 0; i < ballArray.length; i++) {
-    //The for loop sets boundaries for every new object spawned
     fill(ballArray[i].colorValue, ballArray[i].colorValue, ballArray[i].colorValue);
     ellipse(ballArray[i].enemyX, ballArray[i].enemyY, ballArray[i].sizeValue, ballArray[i].sizeValue);
 
     ballArray[i].enemyY += ballArray[i].speedValue;
 
-    //if statement creates a random x position for every new object spawned 
+    //if statement ensures endlessness and score increase
     if (ballArray[i].enemyY > 525) {
         ballArray[i].enemyY = -25;
         ballArray[i].enemyX = random(0,500);
@@ -98,17 +158,17 @@ function draw() {
    //positions of text
     fill(255, 255, 255);
     textSize(22);
-    text("Lives: " + lives, 20, 35);
-    text("Score: " + score, 19, 60);
+    text("Lives: " + lives, 15, 15);
+    text("Score: " + score, 14, 45,);
 
     //bullet creation
-    if (keyIsDown(32) && canShoot == true) {
+    if (keyIsDown(32) && canShoot == true && bulletArray.length < 1) {
         let boolet = new Bullet(myXPos - 2, myYPos - 28, 0, 255, 0, 5, 5, 20);
         bulletArray.push(boolet);
         shoot_sound.play();
         canShoot = false; 
     }
- 
+
     if(!keyIsDown(32)) {
      canShoot = true;
     }
@@ -144,7 +204,7 @@ function draw() {
     }
 
     for (let i = bulletArray.length - 1; i >= 0; i--) {
-        if (bulletArray[i].y < 0) {
+        if (bulletArray[i].bullY < 0) {
           bulletArray.splice(i, 1);
         }
     }
@@ -173,5 +233,56 @@ function draw() {
             temp = new Ball(random(0, 500), random(-500, -20), random(10, 255), random(25, 51), random(2, 5));
             ballArray.push(temp);
         }
+    }
+
+    if (lives <= 0) {
+        gameEnded = true;
+    }
+}
+
+function endGame() {
+    image(space_image, 250, 250);
+    if (!start_end_music.isPlaying()) {
+        start_end_music.loop();
+    }
+
+    if (gameplay_music.isPlaying()) {
+        gameplay_music.stop();
+    }
+
+    textSize(60);
+    fill(255, 0 ,0);
+    text("Game Over", 100, 50);
+    fill(255);
+    textSize(30);
+    text("Final Score: " + score, 155, 140);
+    textSize(20);
+    text("This game was brought to you by: Rahimin, AKM, ", 20, 450);
+    text("Isaac, Leandro, and Cassius", 21, 470);
+    // Draw the "Try Again" button
+    fill(255, 0, 0);
+    rect(250, 270, 120, 40);
+    fill(255);
+    textSize(18);
+    text("Try Again?", 205, 260);
+}
+
+function resetGame() {
+    lives = 3;
+    score = 0;
+    ballArray = [];
+    gameEnded = false;
+    gameStarted = false;
+    for (let i = 0; i < 50; i++) {
+        let temp = new Ball(random(0, 500), random(-500, -20), random(10, 255), random(25, 51), random(2, 5));
+        ballArray.push(temp);
+    }
+}
+
+function mouseClicked() {
+    if (!gameStarted) {
+        gameStarted = true;
+    } else if (gameEnded && mouseX > 190 && mouseX < 310 && mouseY > 250 && mouseY <  290) {
+        resetGame();
     }
 }
