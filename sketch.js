@@ -104,13 +104,15 @@ function beginGame() {
 
     fill(255, 0, 100);
     textSize(20);
-    textStyle(NORMAL);
-    text("Navigate the asteroid field!", 15, 90);
+    textStyle(BOLD);
+    text("Navigate the asteroid field!", 125, 90);
+    fill(255, 255, 51)
+    text("Use Spacebar to shoot asteroids", 95, 120);
     fill(0, 255, 100);
-    text("Reach at least 5000 points to win!", 170, 450);
+    text("Reach at least 5000 points to win!", 90, 150);
     fill(255);
     textSize(30);
-    text("Click to Begin Game...", 110, 250);
+    text("Click to Begin Game...", 95, 250);
     
 }
 
