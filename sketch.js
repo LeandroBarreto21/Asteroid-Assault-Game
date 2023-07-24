@@ -84,6 +84,7 @@ function draw() {
 
 function beginGame() {
     image(space_image, 250, 250);
+    image(ship_image, 250, 400, 40, 40);
     if (!start_end_music.isPlaying()) {
         start_end_music.loop();
     }
