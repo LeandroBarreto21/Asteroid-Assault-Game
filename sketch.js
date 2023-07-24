@@ -272,7 +272,7 @@ function endGame() {
 
     if (score > 10000) {
         textSize(60);
-        fill(255, 0 ,0);
+        fill(0, 255 ,0);
         text("Congrats!", 100, 50);
     }
 
