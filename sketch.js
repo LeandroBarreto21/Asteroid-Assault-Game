@@ -7,6 +7,7 @@ let score = 0;
 let canShoot = true;
 let gameEnded = false;
 let gameStarted = false;
+let gameOverSoundPlayed = false;
 
 
 let ship_image;
@@ -242,6 +243,11 @@ function gameLoop() {
 
 function endGame() {
     image(space_image, 250, 250);
+    
+    if (!game_over.isPlaying() && !gameOverSoundPlayed) {
+        game_over.play();
+        gameOverSoundPlayed = true;
+    }
     if (!start_end_music.isPlaying()) {
         start_end_music.loop();
     }
